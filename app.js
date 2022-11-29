@@ -17,7 +17,9 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
+const CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING
+ || 'mongodb://localhost:27017/music'
+mongoose.connect(CONNECTION_STRING, options);
 
 const app = express();
 app.use(cors({
@@ -33,8 +35,4 @@ app.use(session({
 app.use(express.json())
 
 UsersController(app)
-HelloController(app)
-// SpotifyController(app)
-LastfmController(app)
-
 app.listen(4000)
