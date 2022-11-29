@@ -14,8 +14,7 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-const CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING
- || 'mongodb://localhost:27017/music'
+const CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING || 'mongodb://localhost:27017/music'
 mongoose.connect(CONNECTION_STRING, options);
 
 const app = express();
