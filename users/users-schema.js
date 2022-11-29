@@ -3,11 +3,10 @@ import mongoose from "mongoose";
 const usersSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    email: {type: String, unique:true},
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    neuId: {type: String, required: true, unique: true},
-    type: {type: String, enum: ['STUDENT', 'FACULTY', 'STAFF']},
+    firstName: String,
+    lastName: String,
+    email: String,
+    role: {type: String, enum: ['ADMIN', 'CRITIC', 'FAN']},
 }, {collection: 'users'})
 
 export default usersSchema
