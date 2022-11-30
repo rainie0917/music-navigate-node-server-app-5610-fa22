@@ -14,13 +14,13 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-const CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING || 'mongodb://localhost:27017/music'
-mongoose.connect(CONNECTION_STRING, options);
+const DB_CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING || 'mongodb://localhost:27017/music'
+mongoose.connect(DB_CONNECTION_STRING, options);
 
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    // origin: 'http://localhost:3000'
 }))
 app.use(session({
     secret: 'cat',
