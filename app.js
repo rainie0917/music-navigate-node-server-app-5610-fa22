@@ -1,7 +1,10 @@
 import mongoose from "mongoose"
 import express from 'express'
-import UsersController from "./users/users-controller.js";
+import UsersController from "./controllers/users/users-controller.js";
+import HelloController from "./controllers/hello-controller.js";
 import cors from 'cors'
+import SpotifyController from "./controllers/spotify-api/spotify-controller.js";
+import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -13,10 +16,15 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
+// mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
 
 const app = express();
 app.use(cors())
 app.use(express.json())
+
 UsersController(app)
+HelloController(app)
+// SpotifyController(app)
+LastfmController(app)
+
 app.listen(4000)
