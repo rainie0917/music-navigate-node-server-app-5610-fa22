@@ -9,10 +9,26 @@ export const register = async (user) => {
     if (existingUser) {
         return res.status(403);
     }
-    usersModel.create(user);
+    create(user);
 }
 
 export const findByCredentials = (username, password) =>
     usersModel.findOne(
         {username, password},
         {password: false})
+
+export const createUser = (user) =>
+    usersModel.create(user)
+
+export const findAllUsers = () =>
+    usersModel.find()
+
+export const findUserById = (uid) =>
+    usersModel.findById(uid)
+
+export const deleteUser = (uid) =>
+    usersModel.deleteOne({_id: uid})
+
+export const updateUser = (uid, userUpdates) =>
+    usersModel.updateOne({_id: uid},
+        {$set: userUpdates})
