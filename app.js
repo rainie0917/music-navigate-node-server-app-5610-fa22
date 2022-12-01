@@ -7,6 +7,8 @@ import SpotifyController from "./controllers/spotify-api/spotify-controller.js";
 import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
 import session from 'express-session'
 
+const PORT = (process.env.PORT || 4000);
+
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -17,13 +19,18 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-const DB_CONNECTION_STRING = process.env.MUSIC_DB_CONNECTION_STRING || 'mongodb://localhost:27017/music'
-mongoose.connect(DB_CONNECTION_STRING, options);
+const MUSIC_CONNECTION_STRING = process.env.DB_MUSIC_CONNECTION_STRING || 'mongodb://localhost:27017/music'
+mongoose.connect(MUSIC_CONNECTION_STRING, options);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+    console.log(`Connected successfully to: ${MUSIC_CONNECTION_STRING}`)
+});
 
 const app = express();
 app.use(cors({
     credentials: true,
-    // origin: 'http://localhost:3000'
+    origin: 'http://localhost:3000'
 }))
 app.use(session({
     secret: 'cat',
@@ -34,4 +41,4 @@ app.use(session({
 app.use(express.json())
 
 UsersController(app)
-app.listen(4000)
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

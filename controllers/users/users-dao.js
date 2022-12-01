@@ -7,9 +7,10 @@ export const findByUsername = (username) =>
 export const register = async (user) => {
     const existingUser = await findByUsername(user.username)
     if (existingUser) {
-        return res.status(403).send('User already exists!');
+        return res.sendStatus(403);
     }
-    usersModel.create(user)
+    usersModel.create(user);
+    res.send({message: "You have registered successfully!"})
 }
 
 export const findByCredentials = (username, password) =>
