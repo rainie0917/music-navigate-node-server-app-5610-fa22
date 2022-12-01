@@ -1,14 +1,10 @@
 import mongoose from "mongoose"
 import express from 'express'
-import UsersController from "./controllers/users/users-controller.js";
-import HelloController from "./controllers/hello-controller.js";
 import cors from 'cors'
+import session from 'express-session'
+import UsersController from "./controllers/users/users-controller.js";
 import SpotifyController from "./controllers/spotify-api/spotify-controller.js";
 import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
-import session from 'express-session'
-
-const PORT = (process.env.PORT || 4000);
-const ORIGIN = (process.env.ORIGIN || 'http://localhost:3000');
 
 const options = {
     useNewUrlParser: true,
@@ -31,16 +27,15 @@ db.once("open", function () {
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: ORIGIN
+    origin: 'http://localhost:3000'
 }))
-console.log(`CORS running on ${ORIGIN}`);
 app.use(session({
-    secret: 'cat',
+    secret: 'should be an environment variable',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false}
+    cookie: { secure: false }
 }))
 app.use(express.json())
-
 UsersController(app)
+const PORT = (process.env.PORT || 4000);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
