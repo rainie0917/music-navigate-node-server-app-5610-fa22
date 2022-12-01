@@ -8,6 +8,7 @@ import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
 import session from 'express-session'
 
 const PORT = (process.env.PORT || 4000);
+const ORIGIN = (process.env.ORIGIN || 'http://localhost:3000');
 
 const options = {
     useNewUrlParser: true,
@@ -30,8 +31,9 @@ db.once("open", function () {
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: ORIGIN
 }))
+console.log(`CORS running on ${ORIGIN}`);
 app.use(session({
     secret: 'cat',
     resave: false,

@@ -30,7 +30,7 @@ const UsersController = (app) => {
         const user = req.body
         const existingUser = await userDao.findByUsername(user.username)
         if (existingUser) {
-            res.sendStatus(403);
+            res.status(403);
             return
         }
         const currentUser = await userDao.createUser(user)
