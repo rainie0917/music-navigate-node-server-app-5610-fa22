@@ -1,9 +1,8 @@
 import mongoose from "mongoose"
 import express from 'express'
-import UsersController from "./users/users-controller.js";
 import cors from 'cors'
-
-const PORT = (process.env.PORT || 4000);
+import session from 'express-session'
+import UsersController from "./users/users-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -25,7 +24,17 @@ db.once("open", function () {
 });
 
 const app = express();
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}))
+app.use(session({
+    secret: 'should be an environment variable',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}))
 app.use(express.json())
 UsersController(app)
+const PORT = (process.env.PORT || 4000);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

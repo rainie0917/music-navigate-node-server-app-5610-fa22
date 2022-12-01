@@ -1,50 +1,52 @@
-import * as dao from './users-dao.js'
+import * as userDao from './users-dao.js'
 import {findByCredentials, findByUsername} from "./users-dao.js";
 
 let currentUser = null
 
 const UsersController = (app) => {
-    const createUser = async (req, res) => {
-        const user = req.body
-        const actualUser = await dao.createUser(user)
-        res.json(actualUser)
-    }
     const findAllUsers = async (req, res) => {
-        const users = await dao.findAllUsers()
+        const users = await userDao.findAllUsers()
         res.json(users)
     }
+
+    const createUser = async (req, res) => {
+        const newUser = req.body
+        const actualUser = await userDao.createUser(newUser)
+        res.json(actualUser)
+    }
+
     const deleteUser = async (req, res) => {
         const uid = req.params.uid
-        const status = await dao.deleteUser(uid)
+        const status = await userDao.deleteUser(uid)
         res.json(status)
     }
     const updateUser = async (req, res) => {
         const uid = req.params.uid
         const updates = req.body
-        const status = await dao.updateUser(uid,  updates)
+        const status = await userDao.updateUser(uid,  updates)
         res.json(status)
     }
 
     const register = async (req, res) => {
         const user = req.body
-        const existingUser = await findByUsername(user.username)
+        const existingUser = await userDao.findByUsername(user.username)
         if (existingUser) {
             res.sendStatus(403);
             return
         }
-        const actualUser = await dao.createUser(user)
-        currentUser = actualUser
-        res.json(actualUser)
+        const currentUser = await userDao.createUser(user)
+        req.session['currentUser'] = currentUser
+        res.json(currentUser)
     }
 
     const login = async (req, res) => {
         const credentials = req.body
-        const existingUser = await findByCredentials(credentials.username, credentials.password)
+        const existingUser = await userDao.findByCredentials(credentials.username, credentials.password)
         if (!existingUser) {
             res.sendStatus(403)
             return
         }
-        currentUser = existingUser
+        req.session['currentUser'] = existingUser
         res.json(existingUser)
     }
 

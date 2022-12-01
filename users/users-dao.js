@@ -1,16 +1,7 @@
 import usersModel from "./users-model.js";
 
-//sign up createUser and findByUsername
 export const findByUsername = (username) =>
     usersModel.findOne({username})
-
-export const register = async (user) => {
-    const existingUser = await findByUsername(user.username)
-    if (existingUser) {
-        return res.status(403);
-    }
-    create(user);
-}
 
 export const findByCredentials = (username, password) =>
     usersModel.findOne(
@@ -24,7 +15,7 @@ export const findAllUsers = () =>
     usersModel.find()
 
 export const findUserById = (uid) =>
-    usersModel.findById(uid)
+    usersModel.findById(uid, {password: false})
 
 export const deleteUser = (uid) =>
     usersModel.deleteOne({_id: uid})
