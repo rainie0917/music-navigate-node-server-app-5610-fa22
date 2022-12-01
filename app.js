@@ -3,8 +3,6 @@ import express from 'express'
 import cors from 'cors'
 import session from 'express-session'
 import UsersController from "./controllers/users/users-controller.js";
-import SpotifyController from "./controllers/spotify-api/spotify-controller.js";
-import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
 
 const options = {
     useNewUrlParser: true,
