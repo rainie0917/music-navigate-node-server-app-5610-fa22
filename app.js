@@ -5,6 +5,7 @@ import HelloController from "./controllers/hello-controller.js";
 import cors from 'cors'
 import SpotifyController from "./controllers/spotify-api/spotify-controller.js";
 import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
+import session from 'express-session'
 
 const options = {
     useNewUrlParser: true,
@@ -16,10 +17,19 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-// mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
+mongoose.connect('mongodb://localhost:27017/cs5610-fa22', options);
 
 const app = express();
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}))
+app.use(session({
+    secret: 'cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false}
+}))
 app.use(express.json())
 
 UsersController(app)
