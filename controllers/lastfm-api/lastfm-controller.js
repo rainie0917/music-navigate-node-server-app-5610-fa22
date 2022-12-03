@@ -35,3 +35,13 @@ const LastfmController = (app) => {
 }
 
 export default LastfmController;
+
+
+// search "123" => a, b, c, d, e 4songs
+// user like a => a store in database
+// user like b => b store in database
+
+// homepage: select top 10 liked songs from the database
+
+// name, album, artist, img + like
+
