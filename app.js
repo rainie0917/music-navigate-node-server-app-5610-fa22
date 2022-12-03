@@ -25,13 +25,8 @@ db.once("open", function () {
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: true
 }))
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-})
 app.use(session({
     secret: 'should be an environment variable',
     resave: false,
