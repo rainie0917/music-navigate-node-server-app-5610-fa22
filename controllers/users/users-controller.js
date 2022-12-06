@@ -1,4 +1,5 @@
 import * as userDao from './users-dao.js'
+import {findUserById} from "./users-dao.js";
 
 let currentUser = null
 
@@ -62,10 +63,18 @@ const UsersController = (app) => {
         }
     }
 
+    const findUserById = async (req, res) => {
+        const uid = req.params.uid
+        const status = await userDao.findUserById(uid)
+        res.json(status)
+    }
+
+
     app.post('/users', createUser)
     app.get('/users', findAllUsers)
     app.delete('/users/:uid', deleteUser)
     app.put('/users/:uid', updateUser)
+    app.get('/users/:uid', findUserById)
 
     app.post('/register', register)
     app.post('/login', login)
