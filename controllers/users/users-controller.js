@@ -31,7 +31,7 @@ const UsersController = (app) => {
         const existingUser = await userDao.findByUsername(user.username)
         if (existingUser) {
             res.status(403);
-            console.log("Username already exists");
+            console.log("Username already exists")
             return
         }
         const currentUser = await userDao.createUser(user)
