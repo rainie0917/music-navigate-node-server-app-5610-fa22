@@ -30,7 +30,7 @@ const UsersController = (app) => {
         const user = req.body
         const existingUser = await userDao.findByUsername(user.username)
         if (existingUser) {
-            res.status(403);
+            res.sendStatus(403);
             console.log("Username already exists")
             return
         }
@@ -44,7 +44,7 @@ const UsersController = (app) => {
         const existingUser = await userDao.findByCredentials(credentials.username, credentials.password)
         if (!existingUser) {
             res.sendStatus(403)
-            console.log("Username does not exists, please enter a correct username or register an account")
+            console.log("User does not exists, please enter a correct username or register an account")
             return
         }
         req.session['currentUser'] = existingUser
