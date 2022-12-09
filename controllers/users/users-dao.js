@@ -15,7 +15,7 @@ export const findAllUsers = () =>
     usersModel.find()
 
 export const findUserById = (uid) =>
-    usersModel.findById(uid, {password: false})
+    usersModel.findById({_id: uid})
 
 export const deleteUser = (uid) =>
     usersModel.deleteOne({_id: uid})

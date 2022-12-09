@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import session from 'express-session'
 import UsersController from "./controllers/users/users-controller.js";
+import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -35,4 +36,5 @@ app.use(session({
 }))
 app.use(express.json())
 UsersController(app)
+LastfmController(app)
 app.listen(4000, () => console.log(`Server running on port 4000`))
