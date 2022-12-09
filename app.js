@@ -14,7 +14,7 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 
-const MUSIC_CONNECTION_STRING = process.env.DB_MUSIC_CONNECTION_STRING || 'mongodb://localhost:27017/music'
+const MUSIC_CONNECTION_STRING = "mongodb+srv://musicappcs5610fa22:lRUL6AL8KuX5ECmV@cluster0.h41fvkx.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(MUSIC_CONNECTION_STRING, options);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
@@ -35,5 +35,4 @@ app.use(session({
 }))
 app.use(express.json())
 UsersController(app)
-const PORT = (process.env.PORT || 4000);
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(4000, () => console.log(`Server running on port 4000`))
