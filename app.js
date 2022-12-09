@@ -4,7 +4,10 @@ import cors from 'cors'
 import session from 'express-session'
 import UsersController from "./controllers/users/users-controller.js";
 import LastfmController from "./controllers/lastfm-api/lastfm-controller.js";
+
+import SongsController_home from "./controllers/songs/songs-controller.js";
 import SongsController from "./controllers/lastfm-api/songs-controller.js";
+
 
 const options = {
     useNewUrlParser: true,
@@ -39,8 +42,15 @@ app.use(express.json())
 UsersController(app)
 LastfmController(app)
 
+// <<<<<<< HEAD
+//
+// SongsController(app);
+// const PORT = (process.env.PORT || 4000);
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+// =======
+
 app.listen(4000, () => console.log(`Server running on port 4000`))
 
 SongsController(app)
-
-
+SongsController_home(app)
