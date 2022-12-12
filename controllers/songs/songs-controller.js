@@ -10,10 +10,8 @@ const findSortedSongs  = async (req, res) => {
   res.json(songs);
 }
 
-
-
 const updateSong = async (req, res) => {
-  const songIdToUpdate = req.params['sid'];
+  const songIdToUpdate = req.params.sid;
   const updates = req.body;
   // const songIndex = song.findIndex(
   //     (s) => s._id === songIdToUpdate)
