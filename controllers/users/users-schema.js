@@ -5,9 +5,10 @@ const usersSchema = mongoose.Schema({
     password: {type: String, required: true},
     role: {type: String, enum: ['ADMIN', 'FAN', 'ARTIST']},
     adminInvitationCode: {type: String},
-    firstName: {type: String},
-    lastName: {type: String},
-    email: {type: String},
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
+    email: {type: String, required: true},
+    likedSongs: {type: Array }
 }, {collection: 'users'})
 
 export default usersSchema
