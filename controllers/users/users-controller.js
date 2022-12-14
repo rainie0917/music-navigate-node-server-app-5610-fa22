@@ -8,6 +8,18 @@ const UsersController = (app) => {
         const users = await userDao.findAllUsers()
         res.json(users)
     }
+    
+    const findUserById = async(req, res) => {
+        const uid = req.params.uid
+        const user = await userDao.findUserById(uid)
+        res.json(user)
+    }
+    
+    const findUserByUsername = async (req, res) => {
+        const username = req.params.username
+        const user = await userDao.findByUsername(username)
+        res.json(user)
+    }
 
     const createUser = async (req, res) => {
         const newUser = req.body
@@ -20,11 +32,12 @@ const UsersController = (app) => {
         const status = await userDao.deleteUser(uid)
         res.json(status)
     }
+
     const updateUser = async (req, res) => {
         const uid = req.params.uid
         const updates = req.body
         const status = await userDao.updateUser(uid,  updates)
-        res.json(status)
+        res.json(updates)
     }
 
     const register = async (req, res) => {
@@ -74,6 +87,8 @@ const UsersController = (app) => {
 
     app.post('/users', createUser)
     app.get('/users', findAllUsers)
+    app.get('/users/:uid', findUserById)
+    app.get('/users/username/:username', findUserByUsername)
     app.delete('/users/:uid', deleteUser)
     app.put('/users/:uid', updateUser)
     app.get('/users/:uid', findUserById)
