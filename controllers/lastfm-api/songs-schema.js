@@ -13,10 +13,6 @@ const songsSchema = new mongoose.Schema(
 	{collection: 'songs'}
 )
 
-// const attrSchema = new mongoose.Schema({
-// 	type: positionSchema
-// })
-//
 // const albumSchema = new mongoose.Schema({
 // 	artist: {type: String},
 // 	title: {type: String},
