@@ -5,6 +5,11 @@ const SongsController = (app) => {
 		const songs = await songsDao.findAll()
 		res.json(songs)
 	}
+
+	const findSortedSongs  = async (req, res) => {
+		const songs = await songsDao.findSortedSongs()
+		res.json(songs);
+	}
 	
 	const findByMbid = async (req, res) => {
 		const mbid = req.params.mbid
@@ -27,6 +32,7 @@ const SongsController = (app) => {
 	}
 	
 	app.get('/songs', findAll)
+	// app.get('/songs', findSortedSongs)
 	app.get('/songs/:mbid', findByMbid)
 	app.post('/songs', createSong)
 	app.put('/songs/:mbid', updateSong)

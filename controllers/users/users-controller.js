@@ -8,13 +8,13 @@ const UsersController = (app) => {
         const users = await userDao.findAllUsers()
         res.json(users)
     }
-    
+
     const findUserById = async(req, res) => {
         const uid = req.params.uid
         const user = await userDao.findUserById(uid)
         res.json(user)
     }
-    
+
     const findUserByUsername = async (req, res) => {
         const username = req.params.username
         const user = await userDao.findByUsername(username)
@@ -44,7 +44,7 @@ const UsersController = (app) => {
         const user = req.body
         const existingUser = await userDao.findByUsername(user.username)
         if (existingUser) {
-            res.status(403);
+            res.sendStatus(403);
             console.log("Username already exists")
             return
         }
@@ -58,7 +58,7 @@ const UsersController = (app) => {
         const existingUser = await userDao.findByCredentials(credentials.username, credentials.password)
         if (!existingUser) {
             res.sendStatus(403)
-            console.log("Username does not exists, please enter a correct username or register an account")
+            console.log("User does not exists, please enter a correct username or register an account")
             return
         }
         req.session['currentUser'] = existingUser
@@ -78,11 +78,11 @@ const UsersController = (app) => {
         }
     }
 
-    const findUserById = async (req, res) => {
-        const uid = req.params.uid
-        const status = await userDao.findUserById(uid)
-        res.json(status)
-    }
+    // const findUserById = async (req, res) => {
+    //     const uid = req.params.uid
+    //     const status = await userDao.findUserById(uid)
+    //     res.json(status)
+    // }
 
 
     app.post('/users', createUser)
