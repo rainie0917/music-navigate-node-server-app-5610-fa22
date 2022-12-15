@@ -1,7 +1,7 @@
 import songsModel from '../songs/songs-models.js';
 
 
-export const findSongs = () => songsModel.find();
+// export const findSongs = () => songsModel.find();
 export const findSortedSongs = () => songsModel.find().sort({"likes":-1});
 
 
