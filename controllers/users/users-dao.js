@@ -5,8 +5,7 @@ export const findByUsername = (username) =>
 
 export const findByCredentials = (username, password) =>
     usersModel.findOne(
-        {username, password},
-        {password: false})
+        {username, password})
 
 export const createUser = (user) =>
     usersModel.create(user)
